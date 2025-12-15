@@ -37,13 +37,13 @@ def book_create(request):
             form.save()
             # 書籍の一覧に画面にリダイレクト
             return redirect("book_list")
-        else:
-            # Getリクエストの場合は空のフォームを表示
-            form = BookForm()
-        # "book_form.html"テンプレートにフォームデータを渡して表示
-        return render(
-            request, "bookapp/book_form.html", {"form": form, "title": "書籍登録"}
-        )
+    else:
+        # Getリクエストの場合は空のフォームを表示
+        form = BookForm()
+    # "book_form.html"テンプレートにフォームデータを渡して表示
+    return render(
+        request, "bookapp/book_form.html", {"form": form, "title": "書籍登録"}
+    )
 
 
 # ==================================================
@@ -63,10 +63,10 @@ def book_update(request, pk):
     else:
         # Getリクエストの場合は既存の書籍データをフォームに表示
         form = BookForm(instance=target)
-        # "book_form.html"テンプレートにフォームデータを渡して表示
-        return render(
-            request, "bookapp/book_form.html", {"form": form, "title": "書籍編集"}
-        )
+    # "book_form.html"テンプレートにフォームデータを渡して表示
+    return render(
+        request, "bookapp/book_form.html", {"form": form, "title": "書籍編集"}
+    )
 
 
 # ==================================================
