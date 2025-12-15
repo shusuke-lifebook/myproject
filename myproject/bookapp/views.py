@@ -44,3 +44,41 @@ def book_create(request):
         return render(
             request, "bookapp/book_form.html", {"form": form, "title": "書籍登録"}
         )
+
+
+# ==================================================
+# 書籍の更新
+# ==================================================
+def book_update(request, pk):
+    # 指定された主キー(pk)に対応する書籍を取得、存在しない場合は404エラーを返す。
+    target = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        # フォームにPOSTデータをバインド
+        form = BookForm(request.POST, instance=target)
+        if form.is_valid():
+            # フォームデータが有効であれば更新
+            form.save()
+            # 書籍の一覧画面にリダイレクト
+            return redirect("book_list")
+    else:
+        # Getリクエストの場合は既存の書籍データをフォームに表示
+        form = BookForm(instance=target)
+        # "book_form.html"テンプレートにフォームデータを渡して表示
+        return render(
+            request, "bookapp/book_form.html", {"form": form, "title": "書籍編集"}
+        )
+
+
+# ==================================================
+# 書籍の削除
+# ==================================================
+def book_delete(request, pk):
+    # 指定された主キー(pk)に対応する書籍を取得、存在しない場合は404エラーを返す。
+    target = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        # POSTリクエストの場合、書籍を削除
+        target.delete()
+        # 書籍の一覧にリダイレクト
+        redirect("book_list")
+    # book_confirm_delete.htmlテンプレートに書籍データを渡して表示
+    return render(request, "bookapp/book_confirm_delete.html", {"book": target})
