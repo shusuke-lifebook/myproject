@@ -10,4 +10,4 @@ class BookForm(forms.ModelForm):
         # フォームに基づくモデルを指定
         model = Book
         # フォームに表示するフィールドを指定
-        fileds = ["title", "author", "publication_date"]
+        fields = ["title", "author", "publication_date"]
