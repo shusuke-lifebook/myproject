@@ -29,5 +29,10 @@
 
   // --- VSCode UI カスタマイズ ---
   "workbench.iconTheme": "vscode-icons",
-  "workbench.colorTheme": "Monokai"
+  "workbench.colorTheme": "Monokai",
+
+  // emmetの設定
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  }
 }
