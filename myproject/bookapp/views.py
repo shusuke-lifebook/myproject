@@ -79,6 +79,6 @@ def book_delete(request, pk):
         # POSTリクエストの場合、書籍を削除
         target.delete()
         # 書籍の一覧にリダイレクト
-        redirect("book_list")
+        return redirect("book_list")
     # book_confirm_delete.htmlテンプレートに書籍データを渡して表示
     return render(request, "bookapp/book_confirm_delete.html", {"book": target})
