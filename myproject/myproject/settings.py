@@ -122,3 +122,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# メッセージレベルをDEBUGに設定
+from django.contrib.messages import constants as message_constants
+
+MESSAGE_LEVEL = message_constants.DEBUG

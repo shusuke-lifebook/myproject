@@ -19,4 +19,11 @@ urlpatterns = [
     # 書籍の削除ビューに対応するURLパターン
     # 例; /ex02/1/delete
     path("<int:pk>/delete/", views.book_delete, name="book_delete"),
+    # Messagesフレームワークに対応するURLパターン
+    # メッセージの追加ビューに対応するURLパターン
+    # 例: /ex02/messages/
+    path("messages/", views.add_messages, name="add_messages"),
+    # メッセージの表示ビューに対応するURLパターン
+    # 例: /ex02/dispaly/
+    path("display/", views.show_dispaly_messages, name="display_messages"),
 ]

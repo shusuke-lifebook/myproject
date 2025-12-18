@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import BookForm
@@ -82,3 +83,26 @@ def book_delete(request, pk):
         return redirect("book_list")
     # book_confirm_delete.htmlテンプレートに書籍データを渡して表示
     return render(request, "bookapp/book_confirm_delete.html", {"book": target})
+
+
+# ==================================================
+# Message フレームワークのサンプル
+# ==================================================
+def add_messages(request):
+    # 成功メッセージの追加
+    messages.success(request, "これは成功メッセージです。")
+    # エラーメッセージの追加
+    messages.error(request, "これはエラーメッセージです。")
+    # 情報メッセージの追加
+    messages.info(request, "これは情報メッセージです。")
+    # 警告メッセージの追加
+    messages.warning(request, "これは警告メッセージです。")
+    # デバックメッセージの追加
+    messages.debug(request, "これはデバックメッセージです。")
+    # メッセージを表示する画面にリダイレクト
+    return redirect("display_messages")
+
+
+# メッセージの表示
+def show_dispaly_messages(request):
+    return render(request, "bookapp/show_all_messages.html")

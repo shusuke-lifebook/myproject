@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>メッセージの表示</title>
+    <style>
+        /* メッセージリストのスタイルを設定 */
+        .messages {
+            list-style-type: none; /* リストのマーカを非表示に */
+            padding: 0; /* パディングをリセット */
+        }
+        /* リスト項目のスタイルを設定 */
+        .messages li {
+            margin: 5px 0; /* 各リスト項目の上下に5pxのマージンを設定 */
+            padding: 10px; /* 各リスト項目に10pxのパディングを設定 */
+            border-radius: 3px; /* 角を3pxに丸める */
+        }
+        /* デバックメッセージの背景色を設定 */
+        .debug {
+            background-color: lightgray;
+        }
+        /* 情報メッセージの背景色を設定 */
+        .info {
+            background-color: lightblue;
+        }
+        /* 成功メッセージの背景色を設定*/
+        .success {
+            background-color: lightgreen;
+        }
+        /* 警告メッセージの背景色を設定 */
+        .warning {
+            background-color: yellow;
+        }
+        /* エラーメッセージの背景色を設定 */
+        .error {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <h1>メッセージの表示</h1>
+    {% if messages %}
+        <div class="messages">
+            <!-- 各メッセージをリスト項目としてループ表示 -->
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>
