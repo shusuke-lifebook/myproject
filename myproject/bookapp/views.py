@@ -36,6 +36,8 @@ def book_create(request):
         if form.is_valid():
             # フォームデータが有効であれば
             form.save()
+            # 成功メッセージを追加
+            messages.success(request, "書籍が正常に登録されました。")
             # 書籍の一覧に画面にリダイレクト
             return redirect("book_list")
     else:
@@ -59,6 +61,8 @@ def book_update(request, pk):
         if form.is_valid():
             # フォームデータが有効であれば更新
             form.save()
+            # 成功メッセージを追加
+            messages.success(request, "書籍が正常に更新されました。")
             # 書籍の一覧画面にリダイレクト
             return redirect("book_list")
     else:
@@ -79,6 +83,8 @@ def book_delete(request, pk):
     if request.method == "POST":
         # POSTリクエストの場合、書籍を削除
         target.delete()
+        # 成功メッセージを追加
+        messages.success(request, "書籍が正常に削除されました。")
         # 書籍の一覧にリダイレクト
         return redirect("book_list")
     # book_confirm_delete.htmlテンプレートに書籍データを渡して表示

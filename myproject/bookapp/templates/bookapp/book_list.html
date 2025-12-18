@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>書籍一覧</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
     <h1>書籍一覧</h1>
+    {% comment "▽▽▽ 4.7 ▽▽▽" %}{% endcomment %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages  %}
+            <li class="{ message.tags }">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% comment "△△△ 4.7 △△△" %}{% endcomment %}
     <a href="{% url 'book_create' %}">新規作成</a>
     <ul>
         {% if book_list %}
