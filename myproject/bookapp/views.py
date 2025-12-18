@@ -32,7 +32,7 @@ def book_detail(request, pk):
 def book_create(request):
     if request.method == "POST":
         # フォームにPOSTデータをバインド
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             # フォームデータが有効であれば
             form.save()
@@ -57,7 +57,7 @@ def book_update(request, pk):
     target = get_object_or_404(Book, pk=pk)
     if request.method == "POST":
         # フォームにPOSTデータをバインド
-        form = BookForm(request.POST, instance=target)
+        form = BookForm(request.POST, request.FILES, instance=target)
         if form.is_valid():
             # フォームデータが有効であれば更新
             form.save()

@@ -14,6 +14,11 @@ class Book(models.Model):
     # 出版日
     publication_date = models.DateField()
 
+    # ▽▽▽▽ 4.12 ▽▽▽▽
+    # 画像フィールドを追加
+    cover_image = models.ImageField(upload_to="book_covers/", blank=True, null=True)
+    # △△△△ 4.12 △△△△
+
     # オブジェクトの文字列表現を定義
     def __str__(self):
         # 書籍のタイトルを返す。

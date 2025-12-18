@@ -10,11 +10,14 @@ class BookForm(forms.ModelForm):
         # フォームに基づくモデルを指定
         model = Book
         # フォームに表示するフィールドを指定
-        fields = ["title", "author", "publication_date"]
+        # ▽▽▽▽ 4.13 ▽▽▽▽
+        fields = ["title", "author", "publication_date", "cover_image"]
         # ▽▽▽▽ 4.11 ▽▽▽▽
         labels = {
             "title": "タイトル",
             "author": "著書",
             "publication_date": "出版日",
+            "cover_image": "表紙画像",
         }
+        # △△△△ 4.13 △△△△
         # △△△△ 4.11 △△△△

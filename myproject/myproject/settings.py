@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -130,3 +131,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 from django.contrib.messages import constants as message_constants
 
 MESSAGE_LEVEL = message_constants.DEBUG
+
+# メディアファイルのURL
+MEDIA_URL = "/media/"
+# メディアファイルの保存先を指定
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
