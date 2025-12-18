@@ -1,3 +1,6 @@
+import os
+
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -58,6 +61,11 @@ def book_update(request, pk):
     if request.method == "POST":
         # フォームにPOSTデータをバインド
         form = BookForm(request.POST, request.FILES, instance=target)
+
+        if "cover_image-clear" in request.POST:
+            # フォームにPOSTデータと既存の書籍データをバインド
+            cover_image_delete(target)
+
         if form.is_valid():
             # フォームデータが有効であれば更新
             form.save()
@@ -81,6 +89,8 @@ def book_delete(request, pk):
     # 指定された主キー(pk)に対応する書籍を取得、存在しない場合は404エラーを返す。
     target = get_object_or_404(Book, pk=pk)
     if request.method == "POST":
+        # 画像ファイルの削除
+        cover_image_delete(target)
         # POSTリクエストの場合、書籍を削除
         target.delete()
         # 成功メッセージを追加
@@ -112,3 +122,17 @@ def add_messages(request):
 # メッセージの表示
 def show_dispaly_messages(request):
     return render(request, "bookapp/show_all_messages.html")
+
+
+# ==================================================
+# 画像ファイルの削除
+# ==================================================
+def cover_image_delete(target):
+    # 削除する前に画像ファイルのパスを取得
+    if target.cover_image:
+        # 画像ファイルのパスを取得
+        image_path = os.path.join(settings.MEDIA_ROOT, target.cover_image.path)
+
+        # 画像ファイルが存在する場合は、画像データを削除
+        if os.path.exists(image_path):
+            os.remove(image_path)

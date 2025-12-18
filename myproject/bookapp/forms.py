@@ -21,3 +21,4 @@ class BookForm(forms.ModelForm):
         }
         # △△△△ 4.13 △△△△
         # △△△△ 4.11 △△△△
+        widgets = {"publication_date": forms.DateInput(attrs={"type": "date"})}
