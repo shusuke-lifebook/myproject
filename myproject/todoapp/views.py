@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy  # URL逆引き用のモジュールをインポート
+from django.views.generic import CreateView, DetailView, ListView
 
 from . import models
 
@@ -27,3 +28,17 @@ class TodoDetailView(DetailView):
     template_name = "todoapp/todo_detail.html"
     # テンプレートで使用するオブジェクトの名前を指定
     context_object_name = "todo"
+
+
+# ========================================================
+# Todo作成用のビュー： 継承元はCreateView
+# ========================================================
+class TodoCreateView(CreateView):
+    # 使用するモデルを指定
+    model = models.Todo
+    # 使用するテンプレートファイルを指定
+    template_name = "todoapp/todo_create.html"
+    # フォームで使用するフィールドを指定
+    fields = ["title", "memo", "completed"]
+    # 登録成功時のリダイレクト先を指定
+    success_url = reverse_lazy("todo_list")

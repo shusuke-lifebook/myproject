@@ -10,6 +10,11 @@
     <div class="container">
         <h1>することの一覧</h1>
         <hr>
+        <!-- 新規登録ボタン -->
+        <div class="action-buttons">
+            <a href="{% url 'todo_create' %}" class="btn btn-primary">新規登録</a>
+            <a href="{% url 'menu' %}" class="btn btn-secondary">メニューへ</a>
+        </div>
         <ul class="todo-list">
             {% for todo in todos %}
             <li class="todo-item {% if todo.completed %}completed{% else %}not-completed{% endif %}">
