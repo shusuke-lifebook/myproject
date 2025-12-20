@@ -31,6 +31,9 @@
                 <div class="todo-date">
                     更新日： {{ todo.updated|date:"Y年m月d日 H:i:s" }}
                 </div>
+                <div class="todo-actions">
+                    <a href="{% url 'todo_detail' todo.id %}" class="btn btn-info">詳細</a>
+                </div>
             </li>
             {% endfor %}
         </ul>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>詳細</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'todoapp/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>することの詳細</h1>
+        <hr>
+        <!-- Todoの詳細の表示 -->
+        <div class="todo-detail">
+            <!-- Todo項目のタイトルの表示 -->
+            <div class="todo-title">{{ todo.title }}</div>
+            <div class="todo-memo">{{ todo.memo }}</div>
+
+            <!-- 完了状態の表示 -->
+            <span class="todo-status {% if todo.completed %}completed{% else %}not-completed{% endif %}">
+                {% if todo.completed %}完了{% else %}未完了{% endif %}
+            </span>
+
+            <!-- 作成日時の表示 -->
+            <div class="todo-date">
+                作成日： {{ todo.created|date:"Y年m月d日"}}
+            </div>
+        </div>
+        <div class="back-button">
+            <a href="{% url 'todo_list' %}" class="btn btn-secondary">一覧に戻る</a>
+        </div>
+    </div>
+</body>
+</html>
