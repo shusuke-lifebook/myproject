@@ -9,4 +9,17 @@ from django.shortcuts import render
 # "ハロー、Django!"というテキストを含むHTTPレスポンスを返す。
 # --------------------------------------------------------
 def show_hello(request):
-    return HttpResponse("ハロー、Django!")
+    html_content = """
+        <!DOCTYPE html>
+        <html lang="ja>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hello Django</title>
+        <head>
+        <body>
+            <p>ハロー、Django!</p>
+            <a href="/menu/">メニューに戻る</a>
+        </body>
+        </html>
+    """
+    return HttpResponse(html_content)
