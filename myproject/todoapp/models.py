@@ -11,7 +11,7 @@ class Todo(models.Model):
     memo = models.TextField(null=True, blank=True)
 
     # 完了フラグ: 真偽値(Boolean)フィールド(デフォルトは未完了=False)
-    complated = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
     # 作成日時: 日時フィールド(自動的に現在時刻が設定される)
     created = models.DateTimeField(auto_now_add=True)
