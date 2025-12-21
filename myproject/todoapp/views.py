@@ -10,6 +10,7 @@ from django.views.generic import (
 )
 
 from . import models
+from .forms import TodoForm
 
 
 # Create your views here.
@@ -46,7 +47,9 @@ class TodoCreateView(CreateView):
     # 使用するテンプレートファイルを指定
     template_name = "todoapp/todo_create.html"
     # フォームで使用するフィールドを指定
-    fields = ["title", "memo", "completed"]
+    # fields = ["title", "memo", "completed"]
+    # TodoFormクラスを使用する
+    form_class = TodoForm
     # 登録成功時のリダイレクト先を指定
     success_url = reverse_lazy("todo_list")
 
@@ -60,7 +63,9 @@ class TodoUpdateView(UpdateView):
     # 使用するテンプレートファイルを指定
     template_name = "todoapp/todo_update.html"
     # フォームで使用するフィールド
-    fields = ["title", "memo", "completed"]
+    # fields = ["title", "memo", "completed"]
+    # TodoFormクラスを使用する
+    form_class = TodoForm
     # 更新成功時のリダイレクト先を指定
     success_url = reverse_lazy("todo_list")
 
