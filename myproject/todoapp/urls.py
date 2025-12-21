@@ -17,4 +17,6 @@ urlpatterns = [
     # <int:pk>はURLの一部として渡される整数の主キーを意味し、
     # その主キーに基づいて特定のTodoを表示し、編集する。
     path("<int:pk>/edit/", views.TodoUpdateView.as_view(), name="todo_update"),
+    # '<int:pk>/delete/'というURLにアクセスすると、views.pyのTodoDeleteViewクラスが呼び出される
+    path("<int:pk>/delete/", views.TodoDeleteView.as_view(), name="todo_delete"),
 ]

@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy  # URL逆引き用のモジュールをインポート
 from django.utils.timezone import localtime
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 
 from . import models
 
@@ -66,3 +72,15 @@ class TodoUpdateView(UpdateView):
         print(f"タイトル：'{todo.title}' 更新時間：{localtime(todo.updated)}")
         # 親クラスのform_validを実行し、処理を続行
         return super().form_valid(form)
+
+
+# ========================================================
+# Todo削除用のビュー： 継承元はDeleteView
+# ========================================================
+class TodoDeleteView(DeleteView):
+    # 使用するモデル
+    model = models.Todo
+    # 使用するテンプレートファイルを指定
+    template_name = "todoapp/todo_delete.html"
+    # 削除成功時のリダイレクト先を指定
+    success_url = reverse_lazy("todo_list")
