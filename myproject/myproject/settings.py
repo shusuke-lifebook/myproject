@@ -137,3 +137,10 @@ MESSAGE_LEVEL = message_constants.DEBUG
 MEDIA_URL = "/media/"
 # メディアファイルの保存先を指定
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# 実際のログインのURL
+LOGIN_URL = "/"
+# ログイン成功後のリダイレクト先
+LOGIN_REDIRECT_URL = "menu/"
+# ログアウト後のリダイレクト先
+LOGOUT_REDIRECT_URL = "/"

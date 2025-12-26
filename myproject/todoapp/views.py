@@ -20,13 +20,14 @@ from .forms import TodoForm
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 # Create your views here.
 # ========================================================
-# Todo一覧表示用のビュー： 継承元はListView
+# Todo一覧表示用のビュー： 継承元はListView + LoginRequiredMixin
 # ========================================================
-class TodoListView(ListView):
+class TodoListView(LoginRequiredMixin, ListView):
     # 使用するモデルを指定(Todoモデル)
     model = models.Todo
     # 使用するテンプレートファイルを指定
@@ -36,9 +37,9 @@ class TodoListView(ListView):
 
 
 # ========================================================
-# Todo詳細表示用のビュー： 継承元はDetailView
+# Todo詳細表示用のビュー： 継承元はDetailView + LoginRequiredMixin
 # ========================================================
-class TodoDetailView(DetailView):
+class TodoDetailView(LoginRequiredMixin, DetailView):
     # 使用するモデルを指定(Todoモデル)
     model = models.Todo
     # 使用するテンプレートファイルを指定
@@ -49,8 +50,11 @@ class TodoDetailView(DetailView):
 
 # ========================================================
 # Todo作成用のビュー： 継承元はCreateView + SuccessMessageMixin
+# + LoginRequiredMixin + PermissionRequredMixin
 # ========================================================
-class TodoCreateView(SuccessMessageMixin, CreateView):
+class TodoCreateView(
+    SuccessMessageMixin, LoginRequiredMixin, PermissionRequiredMixin, CreateView
+):
     # 使用するモデルを指定
     model = models.Todo
     # 使用するテンプレートファイルを指定
@@ -63,12 +67,17 @@ class TodoCreateView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy("todo_list")
     # 成功メッセージを設定
     success_message = "ToDoが「登録」されました。"
+    # 作成権限を要求する
+    permission_required = "todoapp.add_todo"
 
 
 # ========================================================
 # Todo更新用のビュー： 継承元はUpdateView + SuccessMessageMixin
+# + LoginRequiredMixin + PermissionRequredMixin
 # ========================================================
-class TodoUpdateView(SuccessMessageMixin, UpdateView):
+class TodoUpdateView(
+    SuccessMessageMixin, LoginRequiredMixin, PermissionRequiredMixin, UpdateView
+):
     # 使用するモデルを指定
     model = models.Todo
     # 使用するテンプレートファイルを指定
@@ -81,6 +90,8 @@ class TodoUpdateView(SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy("todo_list")
     # 成功メッセージを設定
     success_message = "ToDoが「更新」されました。"
+    # 更新権限を要求する
+    permission_required = "todoapp.change_todo"
 
     # フォームのバリデーション(入力チェック)が成功され時に呼ばれるメソッド
     def form_valid(self, form):
@@ -94,8 +105,11 @@ class TodoUpdateView(SuccessMessageMixin, UpdateView):
 
 # ========================================================
 # Todo削除用のビュー： 継承元はDeleteView + SuccessMessageMixin
+# + LoginRequiredMixin + PermissionRequredMixin
 # ========================================================
-class TodoDeleteView(SuccessMessageMixin, DeleteView):
+class TodoDeleteView(
+    SuccessMessageMixin, LoginRequiredMixin, PermissionRequiredMixin, DeleteView
+):
     # 使用するモデル
     model = models.Todo
     # 使用するテンプレートファイルを指定
@@ -104,6 +118,8 @@ class TodoDeleteView(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy("todo_list")
     # 成功メッセージを設定
     success_message = "ToDoが「削除」されました。"
+    # 削除権限を要求する
+    permission_required = "todoapp.delete_todo"
 
 
 # ========================================================
