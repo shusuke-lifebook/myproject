@@ -19,4 +19,6 @@ urlpatterns = [
     path("<int:pk>/edit/", views.TodoUpdateView.as_view(), name="todo_update"),
     # '<int:pk>/delete/'というURLにアクセスすると、views.pyのTodoDeleteViewクラスが呼び出される
     path("<int:pk>/delete/", views.TodoDeleteView.as_view(), name="todo_delete"),
+    # 分析ページのURLを追加
+    path("analytics/", views.TodoAnalyticsView.as_view(), name="todo_analytics"),
 ]
