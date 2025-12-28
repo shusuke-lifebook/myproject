@@ -2,6 +2,7 @@ import os
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import BookForm
@@ -12,6 +13,7 @@ from .models import Book
 # ==================================================
 # 書籍の一覧表示
 # ==================================================
+@login_required
 def book_list(request):
     # すべての書籍をデータベースから取得
     books = Book.objects.all()
@@ -22,6 +24,7 @@ def book_list(request):
 # ==================================================
 # 書籍の詳細表示
 # ==================================================
+@login_required
 def book_detail(request, pk):
     # 指定された主キー(pk)に対応する書籍を取得、存在しない場合は404エラーを返す。
     target = get_object_or_404(Book, pk=pk)
@@ -32,6 +35,8 @@ def book_detail(request, pk):
 # ==================================================
 # 書籍の新規作成
 # ==================================================
+@login_required
+@permission_required("bookapp.add_book", raise_exception=True)
 def book_create(request):
     if request.method == "POST":
         # フォームにPOSTデータをバインド
@@ -55,6 +60,8 @@ def book_create(request):
 # ==================================================
 # 書籍の更新
 # ==================================================
+@login_required
+@permission_required("bookapp.change_book", raise_exception=True)
 def book_update(request, pk):
     # 指定された主キー(pk)に対応する書籍を取得、存在しない場合は404エラーを返す。
     target = get_object_or_404(Book, pk=pk)
@@ -85,6 +92,8 @@ def book_update(request, pk):
 # ==================================================
 # 書籍の削除
 # ==================================================
+@login_required
+@permission_required("bookapp.delete_book", raise_exception=True)
 def book_delete(request, pk):
     # 指定された主キー(pk)に対応する書籍を取得、存在しない場合は404エラーを返す。
     target = get_object_or_404(Book, pk=pk)
