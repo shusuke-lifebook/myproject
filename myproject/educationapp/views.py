@@ -1,3 +1,14 @@
 from django.shortcuts import render
 
+from .models import Student
+
 # Create your views here.
+
+
+# 生徒情報をすべて取得するビュー関数
+def get_all_students(request):
+    # ☆ SELECT * FROM Student; と同じ
+    student_list = Student.objects.all()
+    return render(
+        request, "educationapp/student_list.html", {"student_list": student_list}
+    )
