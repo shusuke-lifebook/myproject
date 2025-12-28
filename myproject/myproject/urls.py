@@ -31,6 +31,8 @@ urlpatterns = [
     path("ex02/", include("bookapp.urls")),
     # 'ex03/'のURLがリクエストされたときに、todoappのURLパターンに委任する
     path("ex03/", include("todoapp.urls")),
+    # 'ex04/'のURLがリクエストさえたときに、educationappのURLパターンに委任する
+    path("ex04", include("educationapp.urls")),
     # menu/というURLにアクセスすると、view.MenuPageViewクラスが呼び出される。
     # name="menu"は、このURLパタンンに名前をつけている
     path("menu/", views.MenuPageView.as_view(), name="menu"),
