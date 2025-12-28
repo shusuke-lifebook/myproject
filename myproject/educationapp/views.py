@@ -9,6 +9,4 @@ from .models import Student
 def get_all_students(request):
     # ☆ SELECT * FROM Student; と同じ
     student_list = Student.objects.all()
-    return render(
-        request, "educationapp/student_list.html", {"student_list": student_list}
-    )
+    return render(request, "educationapp/student_list.html", {"students": student_list})
