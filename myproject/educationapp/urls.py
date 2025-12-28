@@ -11,5 +11,6 @@ urlpatterns = [
         name="orm_index",
     ),
     # 生徒一覧表示するビューに対応するURLパターン
-    path("students/", views.get_all_students, name="student_list"),
+    path("student_list/", views.get_all_students, name="student_list"),
+    path("sutdent/<int:id>/", views.get_student_by_id, name="student_detail"),
 ]
