@@ -50,3 +50,16 @@ def filter_students(request):
             pass
 
     return render(request, "educationapp/student_list.html", {"students": students})
+
+
+# 生徒とプロフィールを統合するビュー関数
+def student_with_profile(request):
+    # StudentとProfileを内部結合して、すべてのデータを取得
+    students_with_profiles = Student.objects.select_related("profile")
+
+    # テンプレートにデータを渡して表示
+    return render(
+        request,
+        "educationapp/student_profile_list.html",
+        {"students_with_profiles": students_with_profiles},
+    )

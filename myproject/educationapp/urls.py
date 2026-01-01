@@ -14,4 +14,9 @@ urlpatterns = [
     path("student_list/", views.get_all_students, name="student_list"),
     path("student/<int:id>/", views.get_student_by_id, name="student_detail"),
     path("students/", views.filter_students, name="students_where"),
+    path(
+        "students_with_profiles/",
+        views.student_with_profile,
+        name="student_join_profile",
+    ),
 ]
