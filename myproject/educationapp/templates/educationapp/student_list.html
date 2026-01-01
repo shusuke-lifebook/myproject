@@ -7,6 +7,33 @@
 <body>
     <h1>生徒リスト</h1>
     <hr>
+    <!-- 検索フォーム -->
+    <strong>抽出(filter)</strong>
+    <form action="{% url 'students_where' %}" method="get">
+        <label for="name">名前：</label>
+        <input type="text" name="name" placeholder="名前の一部を入力" value="{{ request.GET.name | default_if_none:'' }}">
+        <br>
+        <label for="age">年齢：</label>
+        <input type="number" name="age" placeholder="年齢を入力" value="{{ request.GET.age | default_if_none:'' }}">
+        <label for="age_operator">年齢条件：</label>
+        <select name="age_operator" id="age_operator">
+            <option value="">
+                選択
+            </option>
+            <option value="lt" {% if request.GET.age_operator == "lt" %}selected{% endif %}>
+                未満
+            </option>
+            <option value="eq" {% if request.GET.age_operator == "eq" %}selected{% endif %}>
+                同値
+            </option>
+            <option value="gt" {% if request.GET.age_operator == "gt" %}selected{% endif %}>
+                より大きい
+            </option>
+        </select>
+        <button type="submit">実行</button>
+        <br>
+        <button type="button" onclick="location.href='{% url 'students_where' %}'">リセット</button>
+    </form>
     <!-- 生徒リスト -->
     <table border="1">
         <tr>
