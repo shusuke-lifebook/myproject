@@ -4,6 +4,16 @@ from django.db import models
 
 
 # ===================================================
+# クラス(SchoolClass) テーブル
+# ===================================================
+class SchoolClass(models.Model):
+    # クラス名
+    name = models.CharField(max_length=100)
+    # クラスの説明
+    description = models.TextField()
+
+
+# ===================================================
 # 生徒(Student) テーブル
 # ===================================================
 class Student(models.Model):
@@ -13,6 +23,10 @@ class Student(models.Model):
     age = models.IntegerField()
     # 入学日
     enrollment_date = models.DateField()
+    # 1対多の関係を表現するForeignKey
+    class_assigned = models.ForeignKey(
+        SchoolClass, on_delete=models.CASCADE, related_name="students", default=1  # type: ignore
+    )
 
 
 # ===================================================
@@ -29,13 +43,3 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=20)
     # その他の情報
     bio = models.TextField(null=True, blank=True)
-
-
-# ===================================================
-# クラス(SchoolClass) テーブル
-# ===================================================
-class SchoolClass(models.Model):
-    # クラス名
-    name = models.CharField(max_length=100)
-    # クラスの説明
-    description = models.TextField()
