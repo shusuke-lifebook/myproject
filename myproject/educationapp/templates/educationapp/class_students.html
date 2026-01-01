@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クラス別生徒リスト</title>
+</head>
+<body>
+    <h1>クラス別生徒リスト</h1>
+    <form action="{% url 'students_by_class' %}" method="get">
+        <label for="class_id">クラスを選択してください：</label>
+        <select name="class_id" id="class_id" onchange="this.form.submit()">
+            <option value="">-- クラス選択 --</option>
+            {% for school_class in classes %}
+            <option value="{{ school_class.id }}" {% if selected_class and selected_class.id == school_class.id %}selected{% endif %}>
+                {{ school_class.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </form>
+    <hr>
+    <!-- 生徒リスト -->
+    {% if selected_class %}
+        <h2>{{ selected_class.name }}に所属する生徒</h2>
+        <table border="1">
+            <tr>
+                <th>名前</th>
+                <th>年齢</th>
+                <th>入学日</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.enrollment_date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>プルダウンからクラスを選択してください。</p>
+    {% endif %}
+
+    <a href="{% url 'orm_index' %}">Django ORM 操作一覧へ</a>
+</body>
+</html>

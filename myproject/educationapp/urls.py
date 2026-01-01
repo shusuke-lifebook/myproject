@@ -19,4 +19,5 @@ urlpatterns = [
         views.student_with_profile,
         name="student_join_profile",
     ),
+    path("class_students/", views.class_students, name="students_by_class"),
 ]

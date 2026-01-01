@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Student
+from .models import Profile, SchoolClass, Student
 
 # Create your views here.
 
@@ -62,4 +62,33 @@ def student_with_profile(request):
         request,
         "educationapp/student_profile_list.html",
         {"students_with_profiles": students_with_profiles},
+    )
+
+
+# クラスを選択して
+# そのクラスに所属する生徒を表示するビュー関数
+def class_students(request):
+    # すべてのクラスを取得してプルダウン用に提供
+    classes = SchoolClass.objects.all()
+
+    # GETパラメータから選択されたクラスのIDを取得
+    selected_class_id = request.GET.get("class_id")
+
+    # 選択されたクラスに基づいて生徒を取得(1対多の関係を利用)
+    if selected_class_id:
+        # 選択されたクラスを取得
+        selected_class = SchoolClass.objects.get(id=selected_class_id)
+        # 1体多の関係を利用する
+        # クラスに所属する生徒を取得(related_nameを使用)
+        students = selected_class.students.all()  # type: ignore
+    else:
+        # クラスが選択されていない場合は、Noneを設定
+        selected_class = None
+        students = None
+
+    # テンプレートにデータを渡して表示
+    return render(
+        request,
+        "educationapp/class_students.html",
+        {"classes": classes, "students": students, "selected_class": selected_class},
     )
