@@ -14,6 +14,20 @@ class SchoolClass(models.Model):
 
 
 # ===================================================
+# コース(Course) テーブル
+# ===================================================
+class Course(models.Model):
+    # コースの名前
+    title = models.CharField(max_length=100)
+    # コースの説明
+    description = models.TextField()
+    # コースの開始日
+    start_date = models.DateField()
+    # コースの終了日
+    end_date = models.DateField()
+
+
+# ===================================================
 # 生徒(Student) テーブル
 # ===================================================
 class Student(models.Model):
@@ -27,6 +41,8 @@ class Student(models.Model):
     class_assigned = models.ForeignKey(
         SchoolClass, on_delete=models.CASCADE, related_name="students", default=1  # type: ignore
     )
+    # 多対多の関係を表現するManyToManyField
+    courses = models.ManyToManyField(Course, related_name="enrolled_students")
 
 
 # ===================================================
