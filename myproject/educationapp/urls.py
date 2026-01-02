@@ -20,4 +20,9 @@ urlpatterns = [
         name="student_join_profile",
     ),
     path("class_students/", views.class_students, name="students_by_class"),
+    path(
+        "students_with_courses/",
+        views.students_with_courses,
+        name="student_join_table_courses",
+    ),
 ]

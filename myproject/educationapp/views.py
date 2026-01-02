@@ -92,3 +92,16 @@ def class_students(request):
         "educationapp/class_students.html",
         {"classes": classes, "students": students, "selected_class": selected_class},
     )
+
+
+# 生徒一覧とそれぞれが受講しているコースを表示するビュー関数
+def students_with_courses(request):
+    # 全生徒を取得する
+    # prefetch_related('courses'):
+    # 多対多を効率的に取得するために使用
+    # 生徒ごとのコース情報を効率的にロードする。
+    students = Student.objects.prefetch_related("courses")
+
+    return render(
+        request, "educationapp/student_list_with_courses.html", {"students": students}
+    )
