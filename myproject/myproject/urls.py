@@ -25,16 +25,16 @@ from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # 'ex01/'のURLがリクエストされたときに、helloappのURLパターンに委任する
-    path("ex01/", include("helloapp.urls")),
-    # 'ex02/'のURLがリクエストされたときに、bookappのURLパターンに委任する
-    path("ex02/", include("bookapp.urls")),
-    # 'ex03/'のURLがリクエストされたときに、todoappのURLパターンに委任する
-    path("ex03/", include("todoapp.urls")),
-    # 'ex04/'のURLがリクエストさえたときに、educationappのURLパターンに委任する
-    path("ex04/", include("educationapp.urls")),
-    # 'ex05/のURLがリクエストさえたときに、appendixappのURLパターンに委任する
-    path("ex05/", include("appendixapp.urls")),
+    # 'exe01/'のURLがリクエストされたときに、helloappのURLパターンに委任する
+    path("exe01/", include("helloapp.urls")),
+    # 'exe02/'のURLがリクエストされたときに、bookappのURLパターンに委任する
+    path("exe02/", include("bookapp.urls")),
+    # 'exe03/'のURLがリクエストされたときに、todoappのURLパターンに委任する
+    path("exe03/", include("todoapp.urls")),
+    # 'exe04/'のURLがリクエストさえたときに、educationappのURLパターンに委任する
+    path("exe04/", include("educationapp.urls")),
+    # 'exe05/のURLがリクエストさえたときに、appendixappのURLパターンに委任する
+    path("exe05/", include("appendixapp.urls")),
     # menu/というURLにアクセスすると、view.MenuPageViewクラスが呼び出される。
     # name="menu"は、このURLパタンンに名前をつけている
     path("menu/", views.MenuPageView.as_view(), name="menu"),
