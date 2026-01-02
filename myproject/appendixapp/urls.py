@@ -1,6 +1,8 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
+from . import views
+
 urlpatterns = [
     # 「テンプレートの継承」を学習するindex画面を表示するURLパターン
     # 例: /ex05/
@@ -23,4 +25,13 @@ urlpatterns = [
         TemplateView.as_view(template_name="appendixapp/two.html"),
         name="extends_two",
     ),
+    # サンプルのリストを表示するURLパターン
+    # /ex05/samples/
+    path("samples/", views.sample_list, name="sample_list"),
+    # 特定のサンプルの詳細を表示するURLパターン
+    # /ex05/samples/1/ (1はサンプルのID)
+    path("samples/<int:id>/", views.sample_detail, name="sample_detail"),
+    # 新しいサンプルを作成するURLパターン
+    # /ex05/samples/create/
+    path("samples/create/", views.sample_create, name="sample_create"),
 ]
