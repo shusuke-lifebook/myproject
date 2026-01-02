@@ -34,6 +34,8 @@ class TodoListView(LoginRequiredMixin, ListView):
     template_name = "todoapp/todo_list.html"
     # テンプレートで使用するオブジェクトリストの名前を指定
     context_object_name = "todos"
+    # ページネーション(page_objプロパティに設定される)
+    paginate_by = 2
 
 
 # ========================================================
