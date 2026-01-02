@@ -1,0 +1,11 @@
+<!-- 親テンプレート(base.html)を継承 -->
+{% extends "appendixapp/base.html" %}
+
+<!-- base.htmlのtitleブロックを上書きし、ページタイトルを設定 -->
+{% block title %}two{% endblock  %}
+
+<!-- base.htmlのcontentブロックを上書きして独自の内容を追加 -->
+{% block content %}
+    <h2>これは「テンプレート2」の内容です。</h2>
+    <p>ここはbase.htmlの「content」ブロックを上書きにしています。</p>
+{% endblock  %}

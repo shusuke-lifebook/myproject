@@ -34,7 +34,7 @@ urlpatterns = [
     # 'ex04/'のURLがリクエストさえたときに、educationappのURLパターンに委任する
     path("ex04/", include("educationapp.urls")),
     # 'ex05/のURLがリクエストさえたときに、appendixappのURLパターンに委任する
-    path("ex05/", include("myappendixapp.urls")),
+    path("ex05/", include("appendixapp.urls")),
     # menu/というURLにアクセスすると、view.MenuPageViewクラスが呼び出される。
     # name="menu"は、このURLパタンンに名前をつけている
     path("menu/", views.MenuPageView.as_view(), name="menu"),

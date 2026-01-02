@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "bookapp",
     "todoapp",
     "educationapp",
-    "myappendixapp",
+    "appendixapp",
 ]
 
 MIDDLEWARE = [
