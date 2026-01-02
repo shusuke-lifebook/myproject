@@ -34,4 +34,6 @@ urlpatterns = [
     # 新しいサンプルを作成するURLパターン
     # /exe05/samples/create/
     path("samples/create/", views.sample_create, name="sample_create"),
+    # /exe05/paginator
+    path("paginator/", views.sample_paginator, name="sample_paginator"),
 ]

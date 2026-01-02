@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -41,3 +42,17 @@ def sample_create(request):
 
     # GETリクエスト時のフォーム画面を表示
     return render(request, "appendixapp/create.html")
+
+
+# ===============================================
+# ページネーションのサンプル
+# ===============================================
+def sample_paginator(request):
+    # データベースからSampleをすべて取得
+    samples = Sample.objects.all()
+    # ページネーション
+    paginator = Paginator(samples, 2)  # 1ページに2件を表示
+    page_number = request.GET.get("page")  # URLからページ番号を取得
+    page_obj = paginator.get_page(page_number)  # 該当のページのデータを取得
+    # テンプレートにデータを渡して表示
+    return render(request, "appendixapp/sample_list.html", {"page_obj": page_obj})
